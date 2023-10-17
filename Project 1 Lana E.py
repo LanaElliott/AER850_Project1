@@ -129,10 +129,12 @@ jl.dump(selected_model, 'selected_model.joblib')
 # Load the model
 loaded_model = jl.load('selected_model.joblib')
 
-# Predict the maintenance step for the new sample data
-new_sample_data = np.array([[9.375, 3.0625, 1.51], [6.995, 5.125, 0.3875], [0, 3.0625, 1.93], [9.4, 3, 1.8], [9.4, 3, 1.3]])
+# Reshape the new sample data
+new_sample_data = np.array([9.375,3.0625,1.51], [6.995,5.125,0.3875], [0,3.0625,1.93], [9.4,3,1.8], [9.4,3,1.3])
+reshaped_data = new_sample_data.reshape(-1, 3)  # Reshape the data to have 3 features
 
-predicted_steps = loaded_model.predict(new_sample_data)
+# Predict the maintenance step for the new sample data
+predicted_steps = loaded_model.predict(reshaped_data)
 
 # Print the predicted maintenance steps
 print("Predicted Maintenance Steps:")
